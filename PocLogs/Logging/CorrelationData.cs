@@ -5,9 +5,9 @@ using System.Web;
 
 namespace PocLogs.Logging
 {
-    public class CorrelationData<T>
+    public class CorrelationData
     {
         public string ID { get; set; }
-        public T Data { get; set; }
+        public string Data { get; set; }
     }
 }

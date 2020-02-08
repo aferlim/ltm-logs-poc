@@ -7,9 +7,32 @@ namespace PocLogs.Logging
 {
     public class Correlation : ICorrelation
     {
-        public CorrelationData<T> GetCorrelation<T>()
+        private string Id;
+        private object Data;
+
+        private CorrelationData _correlationData;
+
+        private Guid _instance;
+
+        public Correlation()
         {
-            throw new NotImplementedException();
+            _instance = Guid.NewGuid();
         }
+
+
+        public CorrelationData GetCorrelation()
+        {
+            return _correlationData;
+        }
+
+        public void SetCorrelation(string id, string data)
+        {
+            _correlationData = new CorrelationData
+            {
+                ID = id,
+                Data = data
+            };
+        }
+
     }
 }

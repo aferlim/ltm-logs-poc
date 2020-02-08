@@ -6,7 +6,7 @@ using System.Web;
 
 namespace PocLogs.Logging
 {
-    public class LogMetadata
+    public class LogMetadata<T>
     {
         public string RequestContentType { get; set; }
         public string RequestUri { get; set; }

@@ -8,6 +8,8 @@ namespace PocLogs.Logging
 {
     public interface ICorrelation
     {
-        CorrelationData<T> GetCorrelation<T>();
+        CorrelationData GetCorrelation();
+
+        void SetCorrelation(string id, string data);
     }
 }

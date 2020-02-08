@@ -8,11 +8,14 @@ namespace PocLogs.Logging
     public class Log : ILog
     {
         private static NLog.Logger _logging;
+        private readonly ICorrelation _correlation;
 
-        public Log()
+        public Log(ICorrelation correlation)
         {
             if (_logging == null)
                 _logging = NLog.LogManager.GetCurrentClassLogger();
+
+            _correlation = correlation;
         }
 
         public void Debug(string message)
@@ -22,7 +25,8 @@ namespace PocLogs.Logging
 
         public void Info(string message)
         {
-            _logging.Info(message);
+            var correlation = _correlation.GetCorrelation();
+            _logging.Info($"{message} - corr_id: {correlation.ID} partId: {correlation.Data}");
         }
     }
 }

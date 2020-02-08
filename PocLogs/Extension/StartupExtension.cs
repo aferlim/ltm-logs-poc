@@ -1,7 +1,9 @@
 ﻿
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using PocLogs.Handlers;
 using PocLogs.Logging;
+using PocLogs.Request;
 using PocLogs.Service;
 using System;
 using System.Collections.Generic;
@@ -31,6 +33,10 @@ namespace PocLogs.Extension
 
             ILog driver = container.Resolve<ILog>();
 
+            ICorrelation correlationDriver = container.Resolve<ICorrelation>();
+            IBasicRequestDataProvider basicRequestDriver = container.Resolve<IBasicRequestDataProvider>();
+
+            config.MessageHandlers.Add(new CorrelationHandler(correlationDriver, basicRequestDriver));
             config.MessageHandlers.Add(new CustomLogHandler(driver));
 
             return config;
@@ -51,19 +57,16 @@ namespace PocLogs.Extension
         {
             container.RegisterType<ITaskService, TaskService>(new HierarchicalLifetimeManager());
             container.RegisterType<ILog, Log>(new HierarchicalLifetimeManager());
+            container.RegisterType<IBasicRequestDataProvider, BasicRequestDataProvider>(new HierarchicalLifetimeManager());
 
             return container;
         }
 
         private static IUnityContainer ResolveWebRequest(this IUnityContainer container)
         {
-            container.RegisterType<ICorrelation, Correlation>(new PerThreadLifetimeManager());
-
-            container.RegisterType<Func<ICorrelation>, Func<Correlation>>("s", new PerThreadLifetimeManager());
-
+            container.RegisterType<ICorrelation, Correlation>(new ContainerControlledLifetimeManager());
             return container;
         }
-
 
         #endregion
 

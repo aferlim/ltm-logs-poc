@@ -192,9 +192,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\CorrelationHandler.cs" />
     <Compile Include="Logging\Correlation.cs" />
     <Compile Include="Logging\CorrelationData.cs" />
-    <Compile Include="Logging\CustomLogHandler.cs" />
+    <Compile Include="Handlers\CustomLogHandler.cs" />
     <Compile Include="Logging\ICorrelation.cs" />
     <Compile Include="Logging\ILog.cs" />
     <Compile Include="Logging\Log.cs" />
@@ -315,7 +316,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56284</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44305/</IISUrl>
+          <IISUrl>http://localhost:44305/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -24,6 +24,8 @@ namespace PocLogs.Controllers
         {
             _log.Debug("Starting Request...");
             _log.Info("test");
+            Trace.TraceError("If you're seeing this, something bad happened");
+            Trace.WriteLine("Starting Request...");
 
             return await _taskService.GetTasks();
 
